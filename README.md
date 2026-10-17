@@ -9,6 +9,8 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/OctopusDeploy-login/tree/v1.0.2) | [`34b6dcc`](https://github.com/OctopusDeploy/login/commit/34b6dcc1e86fa373c14e6a28c5507d221e4de629) |
+| v1.0.3 | [`v1.0.3`](https://github.com/chainguard-actions/OctopusDeploy-login/tree/v1.0.3) | [`e485a40`](https://github.com/OctopusDeploy/login/commit/e485a40e4b47a154bdf59cc79e57894b0769a760) |
+| v2.0.1 | [`v2.0.1`](https://github.com/chainguard-actions/OctopusDeploy-login/tree/v2.0.1) | [`d156cc2`](https://github.com/OctopusDeploy/login/commit/d156cc2dd8d6f4592c3a0e54e8b51a4ea9198dd5) |
 
 ## Privacy
 
