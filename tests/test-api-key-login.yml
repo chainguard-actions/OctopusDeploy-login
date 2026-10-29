@@ -1,0 +1,49 @@
+name: Test API key login
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          server: https://octopus.example.com/
+          api_key: API-TESTKEY1234567890
+      - name: Assert outputs
+        env:
+          SERVER_OUT: ${{ steps.action.outputs.server }}
+          API_KEY_OUT: ${{ steps.action.outputs.api_key }}
+          ACCESS_TOKEN_OUT: ${{ steps.action.outputs.access_token }}
+        run: |
+          echo "server: $SERVER_OUT"
+          if [ "$SERVER_OUT" != "https://octopus.example.com/" ]; then
+            echo "FAIL: unexpected server output"
+            exit 1
+          fi
+          if [ "$API_KEY_OUT" != "API-TESTKEY1234567890" ]; then
+            echo "FAIL: unexpected api_key output"
+            exit 1
+          fi
+          if [ -n "$ACCESS_TOKEN_OUT" ]; then
+            echo "FAIL: access_token should be empty for API key login"
+            exit 1
+          fi
+          echo "PASS"
+      - name: Assert exported environment variables
+        run: |
+          echo "OCTOPUS_URL: $OCTOPUS_URL"
+          if [ "$OCTOPUS_URL" != "https://octopus.example.com/" ]; then
+            echo "FAIL: OCTOPUS_URL not exported correctly"
+            exit 1
+          fi
+          if [ "$OCTOPUS_API_KEY" != "API-TESTKEY1234567890" ]; then
+            echo "FAIL: OCTOPUS_API_KEY not exported correctly"
+            exit 1
+          fi
+          if [ -n "$OCTOPUS_ACCESS_TOKEN" ]; then
+            echo "FAIL: OCTOPUS_ACCESS_TOKEN should not be set"
+            exit 1
+          fi
+          echo "PASS"
